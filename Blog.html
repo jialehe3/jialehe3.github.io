@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jiale He" />
+
+<meta name="date" content="2019-10-28" />
+
+<title>My First Blog</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Blog.html">Blog</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="mailto:&lt;hjl97352014@gmail.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/jialehe3/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/jiale-he-819976149/">
+    <span class="fa fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://twitter.com/he_jiale">
+    <span class="fa fa-twitter fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">My First Blog</h1>
+<h4 class="author">Jiale He</h4>
+<h4 class="date">10/28/2019</h4>
+
+</div>
+
+
+<p>In Data Science I, we’ve learned mutiple techniques dealing with data. For instance, ggplot2 and tidyverse are very commonly used packages for data visualization. In the midterm project, we were requested to finish a data visualization job with shinny app. The datasets are about the environment impacts of different cuts of beef. It takes me a very long time to figureout a better way other than bar plot: 2D density plot.</p>
+<p>In this midterm project, I used learned techiniques and knowlege, but also new stuff from self-study. Now let’s talk about my masterpiece!</p>
+<p>It might first come in mind that how could 2D density plot show the environment impact? It actually does and from my perspective, pretty nicely done!</p>
+<p>First of all, is to deal with the data. The dataset is called carcass, and I cleaned the data a bit for easier usage later.</p>
+<pre class="r"><code>carcass&lt;- read.csv(&#39;file/carcass_clean.csv&#39;)
+head(carcass,10)</code></pre>
+<pre><code>##               cut total_weight protein.lb Kcal.lb water.rate co2.emision
+## 1  Blended Burger          379         80    1120   6.355078     102.959
+## 2     Ground Beef          250        112    1392   6.355078     102.959
+## 3             Fat          100          0    4050   6.355078     102.959
+## 4           Bones           80         NA      NA   6.355078     102.959
+## 5           Round           64         96     760   6.355078     102.959
+## 6      Chuck Roll           60         76    1200   6.355078     102.959
+## 7  Bone-in Ribeye           48        108    1224   6.355078     102.959
+## 8   Bone-in Strip           36         92    1040   6.355078     102.959
+## 9       Top Round           32        100     760   6.355078     102.959
+## 10        Sirloin           28         88     960   6.355078     102.959
+##    land.use
+## 1        77
+## 2        77
+## 3        77
+## 4        77
+## 5        77
+## 6        77
+## 7        77
+## 8        77
+## 9        77
+## 10       77</code></pre>
+<p>Because I never find a package that has already implemented with an interactive cow map, so some of the steps are done manually. In order to get a cow map, I have to first put the cow map in the plot. I checked online a lot and found that 2D density plot can be easily applied on geographic maps with build-in longitude and latitude values.</p>
+<p>All you have to do is find the location, give it a value, Woa! you have a nice density plot. However, there’s no pre-existed cow map package.</p>
+<p>So to plot a 2D density plot on a cow, I have to find another way round. First, is to have the cow map appear in R. I did not find a way to “plot” the cow, but to either draw the cow or put the cow into the plot as background.</p>
+<p>I read in the picture use the png package, and plot with cowplot package. Unfortunately, it is just a picture and I could do nothing with it. As you can see, the background is white just, if you are familiar with ggplot2, the default plot background is always grey.</p>
+<pre class="r"><code>library(png)
+library(cowplot)
+im &lt;- readPNG(&quot;file/cow.png&quot;)
+beefcut &lt;- ggdraw()+
+  draw_image(im)
+beefcut</code></pre>
+<p><img src="Blog_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>I used the other option. I made the cow map a background of my ggplot, using grid package. And it worked! The background is grey!</p>
+<pre class="r"><code>library(grid)
+library(ggplot2)
+ggplot()+
+  annotation_custom(rasterGrob(im,width = unit(1,&quot;npc&quot;), height = unit(1,&quot;npc&quot;)), -Inf, Inf, -Inf, Inf)</code></pre>
+<p><img src="Blog_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>So I solved the picture issue, how to plot on it? Here comes the manmual part. I set the x and y scale from 0 to 100 for this background, and worked with my teammates with locating all the cuts into file vec.csv.</p>
+<pre class="r"><code>ggplot()+
+  annotation_custom(rasterGrob(im,width = unit(1,&quot;npc&quot;), height = unit(1,&quot;npc&quot;)), -Inf, Inf, -Inf, Inf)+
+  scale_x_continuous(expand=c(0,0), lim=c(0,100)) +
+  scale_y_continuous(expand=c(0,0), lim=c(0,100))</code></pre>
+<p><img src="Blog_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>vec&lt;-read.csv(&quot;file/vec.csv&quot;)
+head(vec,10)</code></pre>
+<pre><code>##               cut    x1   x2   y1   y2
+## 1  Blended Burger  0.50 18.0  9.0 58.0
+## 2     Ground Beef 38.00 70.0 12.5 37.5
+## 3           Round 81.25 88.0 50.5 69.5
+## 4      Chuck Roll 25.50 41.5 62.5 87.5
+## 5  Bone-in Ribeye 41.60 62.5 63.0 87.0
+## 6   Bone-in Strip 50.00 62.5 58.0 87.5
+## 7       Top Round 81.25 88.0 69.5 79.0
+## 8         Sirloin 74.50 79.5 46.0 88.0
+## 9         Brisket 32.00 41.0 53.0 63.0
+## 10    Should Clod 35.00 39.0 54.0 64.0</code></pre>
+<p>As I mentioned, the cow map is not geographic map, and there’s no cow-related package for me to use. To plot 2D density plot on this blank plot (the cow map is just a background), I need to create points on the districts that we manually measured. To begin with, the carcass_clean.csv dataset needs a further change. The package we learned such as tidyverse are really useful here. Tidyr and pipe within tidyverse are used below.</p>
+<pre class="r"><code>library(tidyverse)
+carcass2&lt;- 
+  # alter the original environment impacts to per pound of beef cut and chage units.
+  # %&gt;% sign is pipe, means next step, straight forward logic.
+carcass %&gt;% 
+  # mutate adds new columns with the value you want
+  mutate(water.1000gal.lb = water.rate/total_weight*1000,co2e.kg.lb = co2.emision/total_weight*1000*0.454,landuse.bs.lb = (land.use/total_weight*4047)/420) %&gt;% 
+  # select displays and gives the colums you want
+  select(cut, total_weight, protein.lb, Kcal.lb,water.1000gal.lb,co2e.kg.lb,landuse.bs.lb)
+carcass4 &lt;- carcass2 %&gt;% 
+  # magnify weight value for better density plot
+  mutate(tot_weight_10 = total_weight*10, tot_weight_100 = total_weight*100)
+head(carcass4,10)</code></pre>
+<pre><code>##               cut total_weight protein.lb Kcal.lb water.1000gal.lb
+## 1  Blended Burger          379         80    1120         16.76802
+## 2     Ground Beef          250        112    1392         25.42031
+## 3             Fat          100          0    4050         63.55078
+## 4           Bones           80         NA      NA         79.43847
+## 5           Round           64         96     760         99.29809
+## 6      Chuck Roll           60         76    1200        105.91797
+## 7  Bone-in Ribeye           48        108    1224        132.39746
+## 8   Bone-in Strip           36         92    1040        176.52994
+## 9       Top Round           32        100     760        198.59619
+## 10        Sirloin           28         88     960        226.96707
+##    co2e.kg.lb landuse.bs.lb tot_weight_10 tot_weight_100
+## 1    123.3335      1.957652          3790          37900
+## 2    186.9735      2.967800          2500          25000
+## 3    467.4339      7.419500          1000          10000
+## 4    584.2923      9.274375           800           8000
+## 5    730.3654     11.592969           640           6400
+## 6    779.0564     12.365833           600           6000
+## 7    973.8205     15.457292           480           4800
+## 8   1298.4274     20.609722           360           3600
+## 9   1460.7308     23.185938           320           3200
+## 10  1669.4066     26.498214           280           2800</code></pre>
+<p>As shown above, water.1000gal.lb means 1000gallons of water usage per pound of the cut of beef, so does the co2 emmision, land usage columns etc. These values will then become the number of points randomly generated on the blank plot. Geom_density2d can accept these generated points. For example, Round cut uses 99.29 kgallons of water per pound, recall the location values of round cut, 41.60 62.5 63.0 87.0 will give us a square on the cow map, 99 points will be randomly generated in this square. In order to generate all these points I have to write a function within the function. How to write a function and using for loop are important topics we covered in classes.</p>
+<pre class="r"><code># The first function rwloc is used to calculate weight, it generate random location values(newx,newy) within the square I restricted (x1,x2,y1,y2)
+rwloc &lt;- function(cutname,x1,x2,y1,y2){
+  # cutname is going to be the cutnames from vec.csv, x1 x2 y1 y2 are the corners of the square we manually measured.
+  c4&lt;- carcass4[rep(rownames(carcass4),carcass4$tot_weight_100),]
+  c5&lt;- c4 %&gt;% 
+    # pipe and tidyr again! filter select coditions you set.
+    filter(cut == as.character(cutname))
+  c5$newx &lt;- sample(x1:x2,nrow(c5),replace = TRUE)
+  c5$newy &lt;- sample(y1:y2,nrow(c5),replace = TRUE)
+  return(c5)
+}
+# The second function utilize the first function to repeat this step for the value of weight
+manual &lt;- function(vec){
+  # create empty data.frame
+  a&lt;- data.frame()
+  for (i in 1:nrow(vec)){
+    b&lt;- rwloc(vec[i,1],vec[i,2],vec[i,3],vec[i,4],vec[i,5])
+    # rbind here adds new rows into the dataframe.
+    a&lt;- rbind(a,b)
+  }
+  return(a)
+}
+weight &lt;- manual(vec)
+weight[1:10,6:11]</code></pre>
+<pre><code>##    co2e.kg.lb landuse.bs.lb tot_weight_10 tot_weight_100 newx newy
+## 1    123.3335      1.957652          3790          37900  7.5   13
+## 2    123.3335      1.957652          3790          37900 10.5   47
+## 3    123.3335      1.957652          3790          37900  5.5   53
+## 4    123.3335      1.957652          3790          37900 12.5   40
+## 5    123.3335      1.957652          3790          37900  9.5   32
+## 6    123.3335      1.957652          3790          37900  5.5   29
+## 7    123.3335      1.957652          3790          37900  9.5   14
+## 8    123.3335      1.957652          3790          37900 17.5   14
+## 9    123.3335      1.957652          3790          37900 14.5   36
+## 10   123.3335      1.957652          3790          37900 13.5   14</code></pre>
+<pre class="r"><code>nrow(weight)</code></pre>
+<pre><code>## [1] 114975</code></pre>
+<p>As shown, we generated repeated rows of values but the location value newx and newy are different. The newx and newy will give us randomly located points.</p>
+<p>With the dataset weight of 114975 rows, it’s all repeated points with differnt location value. So I can plot it using ggplot on the cow map.</p>
+<pre class="r"><code>ggplot(data=weight,aes(x = newx, y = newy))+
+  annotation_custom(rasterGrob(im,width = unit(1,&quot;npc&quot;), height = unit(1,&quot;npc&quot;)), -Inf, Inf, -Inf, Inf)+
+  scale_x_continuous(expand=c(0,0), lim=c(0,100)) +
+  scale_y_continuous(expand=c(0,0), lim=c(0,100))+
+  stat_density2d(alpha = 0.5, geom = &quot;polygon&quot;, color = &quot;pink&quot;)+
+  # the 0 to 100 scale is for us to measure the cuts, as the final product, I don&#39;t need them
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())+
+  # give my plot a label
+  labs(title = &quot;2D Density Plot for Beef Cut Chart&quot;)</code></pre>
+<p><img src="Blog_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>As the result, we could observe that, ground beef, blended burger, round part, chuck part and rib part has the highest beef yield. The plot shown contains every cut.</p>
+<p>I personally think this project is very meaningful, it drives me to be creative, and this 2d density plot was the only cow plot among all the midterm products. I think it’s very unique. It’s a little bit sketchy and not good-looking enough, but I utilize the package like tidyr, pipe, ggplot2 and plotly (not included here) learned in class, and techniques such as function, for loop are vital in my project. Apart from these learned knowledge, the project made me learned new pakcages such as grid, cowplot (actually there are tens more but sadly not useful to be applied in my project). For this project, I am learning and reviewing at the same time, it’s fun and challenging but with the product we had, I am more than pround of myself and my teammates Danni and Eddie. The final product can be find <a href="https://jialehe3.shinyapps.io/midtermbeef_3/">here</a>. You can play around with it!</p>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

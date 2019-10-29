@@ -1,7 +1,12 @@
 ---
-title: "Holy cow!"
+title: "Welcome to my website！ This is Jiale He, Graduate student of Weill Cornell Medicine!"
 ---
 
-### I have a webpage!
+```{r, out.width = '30%', fig.align="center", echo = FALSE}
+library(knitr)
+include_graphics("pic/photo.jpg")
+```
 
-And I can put all kinds of stuff on it!
+I am a Graduate Student of Weill Cornell Medicine majored in Biostatistics with a strong biology background.
+I get my B.S. degree in Crop Science - Plant Biotech and Molecular Biology at Univeristy of Illinois.
+My resume can be find [here](file/resume.pdf).

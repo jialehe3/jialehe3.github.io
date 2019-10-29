@@ -1,13 +1,22 @@
-name: "Yay internet!"
+name: "Jiale He"
 output_dir: "."
 navbar:
-  title: "Home"
+  left:
+    - title: "Home"
+      icon: fa-home fa-lg
+      href: index.html
   right:
+    - text: "Blog"
+      href: Blog.html
     - text: "About"
       href: about.html
     - icon: fa-envelope fa-lg
-      href: mailto:<you@youremail.com>
+      href: mailto:<hjl97352014@gmail.com>
     - icon: fa-github fa-lg
-      href: http://github.com/<YOUR_GH_NAME>/
+      href: http://github.com/jialehe3/
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/jiale-he-819976149/
+    - icon: fa-twitter fa-lg
+      href: https://twitter.com/he_jiale
 output:
   html_document
