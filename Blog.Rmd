@@ -5,22 +5,22 @@ date: "10/28/2019"
 output: html_document
 ---
 
-In Data Science I, we've learned mutiple techniques dealing with data. For instance, ggplot2 and tidyverse are very commonly used packages for data visualization.
-In the midterm project, we were requested to finish a data visualization job with shinny app. The datasets are about the environment impacts of different cuts of beef. It takes me a very long time to figureout a better way other than bar plot: 2D density plot.
+In Data Science I, we've learned multiple techniques dealing with data. For instance, ggplot2 and tidyverse are very commonly used packages for data visualization.
+In the midterm project, we were requested to finish a data visualization job with the shiny app. The datasets are about the environmental impacts of different cuts of beef. It takes me a very long time to figure out a better way other than bar plot: 2D density plot.
 
-In this midterm project, I used learned techiniques and knowlege, but also new stuff from self-study. 
+In this midterm project, I used learned techniques and knowledge, but also new stuff from self-study. 
 Now let's talk about my masterpiece!
 
-It might first come in mind that how could 2D density plot show the environment impact? It actually does and from my perspective, pretty nicely done!
+It might first come in mind that how could 2D density plot show the environmental impact? It actually does and from my perspective, pretty nicely done!
 
-First of all, is to deal with the data.
+First of all, it is to deal with the data.
 The dataset is called carcass, and I cleaned the data a bit for easier usage later.
 ```{r}
 carcass<- read.csv('file/carcass_clean.csv')
 head(carcass,10)
 ```
 
-Because I never find a package that has already implemented with an interactive cow map, so some of the steps are done manually. In order to get a cow map, I have to first put the cow map in the plot. I checked online a lot and found that 2D density plot can be easily applied on geographic maps with build-in longitude and latitude values.
+Because I never find a package that has already implemented with an interactive cow map, so some of the steps are done manually. To get a cow map, I have to first put the cow map in the plot. I checked online a lot and found that the 2D density plot can be easily applied on geographic maps with build-in longitude and latitude values.
 
 All you have to do is find the location, give it a value, Woa! you have a nice density plot. However, there's no pre-existed cow map package. 
 
@@ -36,7 +36,7 @@ beefcut <- ggdraw()+
 beefcut
 ```
 
-I used the other option. I made the cow map a background of my ggplot, using grid package. And it worked! The background is grey!
+I used the other option: I made the cow map a background of my ggplot, using grid package. And it worked! The background is grey and it's in a plot!
 ```{r message=FALSE}
 library(grid)
 library(ggplot2)
@@ -44,7 +44,7 @@ ggplot()+
   annotation_custom(rasterGrob(im,width = unit(1,"npc"), height = unit(1,"npc")), -Inf, Inf, -Inf, Inf)
 ```
 
-So I solved the picture issue, how to plot on it? Here comes the manmual part. I set the x and y scale from 0 to 100 for this background, and worked with my teammates with locating all the cuts into file vec.csv.
+So I solved the picture issue, what's next? Here comes the manmual part. I set the x and y scale from 0 to 100 for this background, and worked with my teammates with locating all the cuts into file vec.csv.
 ```{r}
 ggplot()+
   annotation_custom(rasterGrob(im,width = unit(1,"npc"), height = unit(1,"npc")), -Inf, Inf, -Inf, Inf)+
@@ -54,7 +54,8 @@ vec<-read.csv("file/vec.csv")
 head(vec,10)
 ```
 
-As I mentioned, the cow map is not geographic map, and there's no cow-related package for me to use. To plot 2D density plot on this blank plot (the cow map is just a background), I need to create points on the districts that we manually measured. To begin with, the carcass_clean.csv dataset needs a further change. The package we learned such as tidyverse are really useful here. Tidyr and pipe within tidyverse are used below.
+As I mentioned, the cow map is not a geographic map, and there's no cow-related package for me to use. To plot the 2D density plot on this blank plot (the cow map is just a background), I need to create points on the districts that we manually measured. To begin with, the carcass_clean.csv dataset needs further change. The packages we learned such as tidyverse are really useful here. Tidyr and pipe within tidyverse are used below.
+
 ```{r message=FALSE}
 library(tidyverse)
 carcass2<- 
@@ -71,7 +72,7 @@ carcass4 <- carcass2 %>%
 head(carcass4,10)
 ```
 
-As shown above, water.1000gal.lb means 1000gallons of water usage per pound of the cut of beef, so does the co2 emmision, land usage columns etc. These values will then become the number of points randomly generated on the blank plot. Geom_density2d can accept these generated points. For example, Round cut uses 99.29 kgallons of water per pound, recall the location values of round cut, 41.60	62.5	63.0	87.0 will give us a square on the cow map, 99 points will be randomly generated in this square. In order to generate all these points I have to write a function within the function. How to write a function and using for loop are important topics we covered in classes.
+As shown above, water.1000gal.lb means 1000gallons of water usage per pound of the cut of beef, so does the co2 emissions, land usage columns, etc. These values will then become the number of points randomly generated on the blank plot. Geom_density2d can accept these generated points. For example, Round-cut uses 99.29 thousand gallons of water per pound, recall the location values of round-cut, 41.60    62.5    63.0    87.0 will give us a square on the cow map, 99 points will be randomly generated in this square. To generate all these points, I have to write a function within the function. How to write a function and using for loop are important topics we covered in classes.
 
 ```{r}
 # The first function rwloc is used to calculate weight, it generate random location values(newx,newy) within the square I restricted (x1,x2,y1,y2)
@@ -100,9 +101,9 @@ weight <- manual(vec)
 weight[1:10,6:11]
 nrow(weight)
 ```
-As shown, we generated repeated rows of values but the location value newx and newy are different. The newx and newy will give us randomly located points.
+As shown, I generated repeated rows of values but the location value newx and newy are different. The newx and newy will give us randomly located points.
 
-With the dataset weight of 114975 rows, it's all repeated points with differnt location value. So I can plot it using ggplot on the cow map.
+Dataset Weight has 114975 rows, it's all repeated points with differnt location value. So I can plot them using ggplot2 stat_density2d on the cow map.
 ```{r}
 ggplot(data=weight,aes(x = newx, y = newy))+
   annotation_custom(rasterGrob(im,width = unit(1,"npc"), height = unit(1,"npc")), -Inf, Inf, -Inf, Inf)+
@@ -120,9 +121,9 @@ ggplot(data=weight,aes(x = newx, y = newy))+
   labs(title = "2D Density Plot for Beef Cut Chart")
 ```
 
-As the result, we could observe that, ground beef, blended burger, round part, chuck part and rib part has the highest beef yield. The plot shown contains every cut.
+As a result, we could observe that ground beef, blended burger, round part, chuck part and rib part has the highest beef yield. The plot shown contains every cut.
 
-I personally think this project is very meaningful, it drives me to be creative, and this 2d density plot was the only cow plot among all the midterm products. I think it's very unique. It's a little bit sketchy and not good-looking enough, but I utilize the package like tidyr, pipe, ggplot2 and plotly (not included here) learned in class, and techniques such as function, for loop are vital in my project. Apart from these learned knowledge, the project made me learned new pakcages such as grid, cowplot (actually there are tens more but sadly not useful to be applied in my project). For this project, I am learning and reviewing at the same time, it's fun and challenging but with the product we had, I am more than pround of myself and my teammates Danni and Eddie. The final product can be find [here](https://jialehe3.shinyapps.io/midtermbeef_3/). You can play around with it!
+I personally think this project is very meaningful, it drives me to be creative, and this 2d density plot was the only cow plot among all the midterm products. I think it's very unique. It's a little bit sketchy and not good-looking enough, but I utilize the package like tidyr, pipe, ggplot2 and plotly (not included here) learned in class, and techniques such as function, for loops are vital in my project. Apart from the learned knowledge, the project made me learned new packages such as grid, cowplot (actually there are tens more but sadly not useful to be applied in my project). For this project, I am learning and reviewing at the same time, it's fun and challenging but with the product we had, I am more than proud of myself and my teammates Danni and Eddie. The final product can be found [here](https://jialehe3.shinyapps.io/midtermbeef_3/). You can play around with it!
 
 
 
