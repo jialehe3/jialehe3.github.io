@@ -4,6 +4,6 @@ title: "About"
 
 ### About this site
 
-This site is currently for Data Science I at Weill Cornell Medicine.
+This site is a brief introduction of me
 
-We learned to make our own website along with our very first personal blog!
+Expect for more postings/blogs!
